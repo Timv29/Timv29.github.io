@@ -1,6 +1,67 @@
-body {
-	color: rgb(18, 38, 250);
-	background-color: rgb(132, 227, 241);
-	font-size: 20px;
-	font-family: Calibri, sans-serif;
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+body{
+    background-color: rgb(0, 207, 0);
+}
+
+#container{
+    max-width: 900px;
+    max-height: 700px;
+    margin: 100px auto;
+    background-color: rgba(0, 0, 0, 0.308);
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    padding: 25px;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: brown green;
+}
+
+#container::-webkit-scrollbar{
+    width: 16px;
+    height: 16px;
+}
+
+#container::-webkit-scrollbar-track{
+    background: green;
+}
+
+#container::-webkit-scrollbar-thumb{
+    background: brown;
+}
+
+#container::-webkit-scrollbar-thumb:hover{
+    background: rgb(192, 77, 77);
+}
+
+#container::-webkit-scrollbar-thumb:active{
+    background:rgb(240, 127, 127)
+}
+
+.empty-scroll{
+    min-width: 80px;
+}
+
+figure{
+    margin: 25px;
+    scroll-snap-align: center;
+}
+
+figure img{
+    width: min(800px, 80vw);
+    object-fit: contain;
+    border-radius: 25px;
+    box-shadow: 5px 5px 10px black;
+}
+
+figure figcaption{
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px black;
 }
