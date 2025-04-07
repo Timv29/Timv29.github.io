@@ -1,0 +1,255 @@
+@font-face {font-family:"Pokemon Pixel Font Regular";src:url("../fonts/pokemon_pixel_font.eot") format("eot"),url("../fonts/pokemon_pixel_font.woff") format("woff"),url("../fonts/pokemon_pixel_font.ttf") format("truetype"),url("../fonts/pokemon_pixel_font.svg#Pokemon-Pixel-Font") format("svg");font-weight:normal;font-style:normal;}
+@font-face {font-family: "Pokemon"; src:url("../fonts/Pokemon\ Classic.ttf")};
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: "Pokemon";
+    font-size: 10px;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+nav{
+    width: 33vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 10vw));
+    justify-content: space-evenly;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
+    position: sticky;
+    top: 0;
+    background-image:
+        radial-gradient(circle, white 7%, rgb(85, 83, 83) 7%, rgb(85, 83, 83) 12%, rgba(0,0,0,0)12%),
+        linear-gradient(to bottom, rgba(255, 0, 0, 0.5) 48%, rgb(85, 83, 83) 48%,rgb(85, 83, 83) 52%,  white 52%);
+}
+
+nav div{
+    text-align: center;
+    cursor: pointer;
+}
+
+nav div p{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+#sprite{
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+}
+
+.main{
+    width: 67vw;
+}
+
+.info h1{
+    margin: 0;
+    font-size: 2rem;
+}
+
+.info{
+    font-size: 1.2rem;
+}
+
+.info>p, #startingMoves, #moves, #infoHeader{
+    padding: 10px;
+}
+
+#infoHeader{
+    border-bottom: 2px solid rgb(56, 56, 56);
+}
+
+#startingMoves{
+    padding-bottom: 0;
+}
+
+#types{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.type{
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.type p{
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+#moves{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+.move{
+    min-width: 80px;
+    min-height: 20px;
+    text-align: center;
+    background-image: url("../images/pokemon_ui_template.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 2px 5px;
+}
+
+.move p{
+    margin: 5px auto;
+}
+
+#teamButton button{
+    width: 140px;
+    height: 40px;
+    margin: 10px;
+    font-family: "Pokemon";
+    font-size: 1rem;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#teamButton button:hover{
+    background-color: rgb(194, 194, 194);
+}
+
+#team{
+    padding: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 15px;
+    justify-content: center;
+    border-top: 2px solid rgb(56, 56, 56);
+    border-bottom: 2px solid rgb(56, 56, 56);
+}
+
+.teamPkmn{
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px;
+    padding-top: 0px;
+    background-color: rgb(243, 243, 243);
+    position: relative;
+}
+
+.teamPkmn p{
+    margin: 0;
+}
+
+.teamPkmn p:first-of-type{
+    width: 12px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+#infoHeader canvas{
+    width: clamp(250px, 50vw, 400px);
+}
+
+#teamStats canvas{
+    margin-top: 15px;
+    width: clamp(250px, 60vw, 600px);
+    min-height: 130px;
+}
+
+#teamStats h1{
+    text-align: center;
+}
+
+#teamTypes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 15px
+}
+
+@media (max-width: 550px) {
+    body{
+        flex-direction: column;
+    }
+
+    nav{
+        position: relative;
+        width: 100vw;
+        height: 30vh;
+        order: 2;
+    }
+
+    .main{
+        box-sizing: border-box;
+        width: 100vw;
+        height: 70vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        border-bottom: 2px solid black;
+        order: 1;
+    }
+
+    #infoHeader{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+    }
+    
+    #infoHeader canvas{
+        width: min(80vw, 400px)
+    }
+
+    .info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #startingMoves{
+        text-align: center;
+    }
+
+    #moves{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    #teamButton{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #teamStats{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #teamStats canvas{
+        width: min(90vw, 600px);
+        min-height: 150px
+    }
+
+}
