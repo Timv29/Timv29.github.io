@@ -164,10 +164,12 @@ nav div p{
 }
 
 #infoHeader canvas{
+    image-rendering: pixelated;
     width: clamp(250px, 50vw, 400px);
 }
 
 #teamStats canvas{
+    image-rendering: pixelated;
     margin-top: 15px;
     width: clamp(250px, 60vw, 600px);
     min-height: 130px;
@@ -181,7 +183,8 @@ nav div p{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    gap: 15px
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 550px) {
