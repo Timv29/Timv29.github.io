@@ -1,9 +1,19 @@
 import {typeColors, statColors} from "./colors.js";
 import {adjustColor} from "./colorChange.js";
+import generateTeam from "./team.js"
 
 let previousStats = null;
+let team = [];
 
-export default function generateInfo(data){
+function capitalize(string) {
+    return String(string).charAt(0).toUpperCase() + String(string).slice(1);
+}
+
+if(localStorage.getItem("team") !== null){
+    team = JSON.parse(localStorage.getItem("team"));
+}
+
+export default function generateInfo(data, regions){
     const info = document.querySelector(".info");
     info.innerHTML = "";
     document.querySelector("#moves").innerHTML = ""
@@ -30,17 +40,68 @@ export default function generateInfo(data){
     size.innerHTML = `Height: ${data.height / 10}m - Weight: ${data.weight / 10}kg`;
     //description
     const desc = document.createElement("p");
+    const region = document.createElement("p");
+    const evolutionDiv = document.createElement("div");
+    evolutionDiv.setAttribute("id", "evolutions");
     fetch(data.species.url, {method: "GET", cache: "default"})
         .then(response => response.json())
-        .then(Speciesdata => {
-            for(const entry of Speciesdata.flavor_text_entries){
+        .then(speciesData => {
+            for(const entry of speciesData.flavor_text_entries){
                 if(entry.language.name === "en"){
                     desc.innerHTML = entry.flavor_text;
                 }
             }
-            if(Speciesdata.is_legendary === true || Speciesdata.is_mythical === true){
+            if(speciesData.is_legendary === true || speciesData.is_mythical === true){
                 name.innerHTML += "★"
-            } 
+            }
+            region.innerHTML = `Introduced in ${capitalize(regions.get(speciesData.generation.name))}`
+
+            //evolutions
+            fetch(speciesData.evolution_chain.url)
+                .then(response => response.json())
+                .then(evoData => {
+                    function displayChain(data, div){
+                        const species = document.createElement("p");
+                        const divider = document.createElement("img");
+                        species.innerHTML = data.species.name;
+                        switch(true){
+                            case data.evolves_to.length > 1:
+                                divider.setAttribute("src", "images/split.png");
+                                break;
+                            case data.evolves_to.length === 1:
+                            default:
+                                divider.setAttribute("src", "images/right-arrow.png");
+                                break;
+                        }
+                        if(data.species.name === speciesData.name){
+                            species.style.backgroundColor = "rgb(152, 255, 161)";
+                        }
+                        else{
+                            species.style.cursor = "pointer";
+                            species.addEventListener("click", () => {
+                                fetch(`https://pokeapi.co/api/v2/pokemon/${data.species.name}/`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        generateInfo(data, regions);
+                                    })
+                            })
+                        }
+                        div.appendChild(species);
+                        evolutionDiv.appendChild(div);
+                        if(data.evolves_to.length > 0){
+                            evolutionDiv.appendChild(divider);
+                            const evoSpeciesDiv = document.createElement("div");
+                            evoSpeciesDiv.setAttribute("class", "evolution")
+                            for(const evolution of data.evolves_to){
+                                displayChain(evolution, evoSpeciesDiv);
+                            }
+                        }
+                    }
+
+                    const evoSpeciesDiv = document.createElement("div");
+                    evoSpeciesDiv.setAttribute("class", "evolution")
+                    displayChain(evoData.chain, evoSpeciesDiv);
+                })
         });
     const typesDiv = document.createElement("div");
     typesDiv.setAttribute("id", "types");
@@ -113,6 +174,8 @@ export default function generateInfo(data){
     info.appendChild(typesDiv);
     info.appendChild(size);
     info.appendChild(desc);
+    info.appendChild(region);
+    info.appendChild(evolutionDiv);
     for(const move of data.moves){
         if(move.version_group_details[0].level_learned_at <= 1 && move.version_group_details[0].move_learn_method.name === "level-up"){
             const moveDiv = document.createElement("div");
@@ -124,4 +187,24 @@ export default function generateInfo(data){
         }
     }
 
+    //team
+    document.querySelector("#teamButton").innerHTML = "";
+    const addBtn = document.createElement("button");
+    addBtn.innerHTML = "Add to Team";
+    document.querySelector("#teamButton").appendChild(addBtn);
+    if(team !== []){
+        generateTeam(team);
+    }
+    addBtn.addEventListener("click", () => {
+        if(team.length < 6){
+            const pokeCopy = structuredClone(data);
+            pokeCopy.name = prompt("What do you want to name your Pokémon?", pokeCopy.name);
+            team.push(pokeCopy)
+        }
+        else{
+            alert("Team already has 6 Pokémon");
+        }
+        localStorage.setItem("team", JSON.stringify(team));
+        generateTeam(team);
+    })
 }

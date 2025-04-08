@@ -63,7 +63,7 @@ export default function generateTeam(array){
                 const startValue = initialStats[i].stat;
                 const endValue = teamStats[i].stat;
                 const widthValue = startValue + (endValue - startValue) * (progress/100);
-                const width = (widthValue / 255) * 130;
+                const width = (widthValue / 255) * 100;
 
                 ctx.fillStyle = statColors[teamStats[i].name] 
                 ctx.fillRect(200, y, width, 20);
