@@ -1,6 +1,7 @@
 import {typeColors, statColors} from "./colors.js";
 import {adjustColor} from "./colorChange.js";
-import generateTeam from "./team.js"
+import generateTeam from "./team.js";
+import generateEvolution from "./evolution.js";
 
 let previousStats = null;
 let team = [];
@@ -57,52 +58,9 @@ export default function generateInfo(data, regions){
             region.innerHTML = `Introduced in ${capitalize(regions.get(speciesData.generation.name))}`
 
             //evolutions
-            fetch(speciesData.evolution_chain.url)
-                .then(response => response.json())
-                .then(evoData => {
-                    function displayChain(data, div){
-                        const species = document.createElement("p");
-                        const divider = document.createElement("img");
-                        species.innerHTML = data.species.name;
-                        switch(true){
-                            case data.evolves_to.length > 1:
-                                divider.setAttribute("src", "images/split.png");
-                                break;
-                            case data.evolves_to.length === 1:
-                            default:
-                                divider.setAttribute("src", "images/right-arrow.png");
-                                break;
-                        }
-                        if(data.species.name === speciesData.name){
-                            species.style.backgroundColor = "rgb(152, 255, 161)";
-                        }
-                        else{
-                            species.style.cursor = "pointer";
-                            species.addEventListener("click", () => {
-                                fetch(`https://pokeapi.co/api/v2/pokemon/${data.species.name}/`)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        generateInfo(data, regions);
-                                    })
-                            })
-                        }
-                        div.appendChild(species);
-                        evolutionDiv.appendChild(div);
-                        if(data.evolves_to.length > 0){
-                            evolutionDiv.appendChild(divider);
-                            const evoSpeciesDiv = document.createElement("div");
-                            evoSpeciesDiv.setAttribute("class", "evolution")
-                            for(const evolution of data.evolves_to){
-                                displayChain(evolution, evoSpeciesDiv);
-                            }
-                        }
-                    }
-
-                    const evoSpeciesDiv = document.createElement("div");
-                    evoSpeciesDiv.setAttribute("class", "evolution")
-                    displayChain(evoData.chain, evoSpeciesDiv);
-                })
+            generateEvolution(speciesData, evolutionDiv, regions);
         });
+
     const typesDiv = document.createElement("div");
     typesDiv.setAttribute("id", "types");
     //types
