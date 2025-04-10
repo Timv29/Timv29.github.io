@@ -33,8 +33,7 @@ export default function generateTeam(array, lang, regions){
         teamPkmn.appendChild(name);
         sprite.addEventListener("click", () => {
             generateInfo(pokemon, regions, lang);
-            location.href = "#"
-            window.scrollTo(0,0);
+            document.querySelector(".main").scrollTo(0,0);
         })
         teamPkmn.style.border = `2px solid ${typeColors[pokemon.types[0].type.name]}`;
         document.querySelector("#team").appendChild(teamPkmn);
