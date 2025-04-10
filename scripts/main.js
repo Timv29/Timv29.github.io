@@ -49,13 +49,13 @@ async function fetchPokemon(){
             pokeDiv.appendChild(sprite);
             pokeDiv.appendChild(pokeId);
             pokeDiv.addEventListener("click", () => {
-                window.scrollTo(0,0);
                 showPkmn(data, lang);
+                document.querySelector(".main").scrollTo({top: 0});
             })
             document.querySelector("nav").appendChild(pokeDiv);
             if(i === 1){
                 showPkmn(data, lang);
-                window.scrollTo(0,0);
+                document.querySelector(".main").scrollTo({top: 0});
             }
 
         }
