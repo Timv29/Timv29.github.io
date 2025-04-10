@@ -53,6 +53,13 @@ nav div p{
 
 .main{
     width: 67vw;
+    position: relative;
+}
+
+#lang{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 .info h1{
@@ -194,6 +201,10 @@ nav div p{
     right: 10px;
 }
 
+.teamPkmn img{
+    cursor: pointer;
+}
+
 #infoHeader canvas{
     width: clamp(250px, 50vw, 400px);
 }
@@ -217,6 +228,10 @@ nav div p{
 }
 
 @media (max-width: 550px) {
+    html{
+        scroll-behavior: smooth;
+    }
+
     body{
         flex-direction: column;
     }

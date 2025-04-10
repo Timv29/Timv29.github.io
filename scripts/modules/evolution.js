@@ -1,17 +1,24 @@
 import generateInfo from "./pokeInfo.js";
 
-export default function generateEvolution(speciesData, targetDiv, regions){
+export default function generateEvolution(speciesData, targetDiv, regions, lang){
 
     fetch(speciesData.evolution_chain.url)
     .then(response => response.json())
     .then(evoData => {
-        console.log(evoData.chain);
         function displayChain(data, div){
             const species = document.createElement("div");
             species.setAttribute("class", "evolution")
             const divider = document.createElement("img");
             const name = document.createElement("p");
-            name.innerHTML = data.species.name;
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${data.species.name}`, {method: "get", cache: "force-cache"})
+                .then(response => response.json())
+                .then(specData => {
+                    for(const entry of specData.names){
+                        if(entry.language.name === lang){
+                            name.innerHTML = entry.name;
+                        }
+                    }
+                })
             const method = document.createElement("p");
             if(data.evolution_details.length === 1){
                 if(data.evolution_details[0].trigger.name === "level-up"){
@@ -30,6 +37,9 @@ export default function generateEvolution(speciesData, targetDiv, regions){
                             break;
                         default:
                             method.innerHTML = 'other';
+                    }
+                    if(data.evolution_details[0].time_of_day !== ""){
+                        method.innerHTML += ` during ${data.evolution_details[0].time_of_day}`
                     }
                 }
                 else if(data.evolution_details[0].trigger.name === "use-item"){
@@ -73,7 +83,7 @@ export default function generateEvolution(speciesData, targetDiv, regions){
                     fetch(`https://pokeapi.co/api/v2/pokemon/${data.species.name}/`)
                         .then(response => response.json())
                         .then(data => {
-                            generateInfo(data, regions);
+                            generateInfo(data, regions, lang);
                         })
                 })
             }

@@ -1,5 +1,16 @@
 import generateInfo from "./modules/pokeInfo.js"
 
+let currentPokemon;
+let lang;
+const select = document.querySelector("#lang")
+
+if(localStorage.getItem("lang") !== null){
+    lang = localStorage.getItem("lang");
+    select.value = lang;
+}
+else{
+    lang = "en";
+}
 
 const regions = new Map;
 fetch("https://pokeapi.co/api/v2/generation", {method: "GET"})
@@ -14,10 +25,9 @@ fetch("https://pokeapi.co/api/v2/generation", {method: "GET"})
         }
     })
 
-
 async function fetchPokemon(){
     //Aantal pokemon kleiner gemaakt om niet steeds de API te belasten, terugzetten naar 898
-    for(let i=1;i<=151;i++){
+    for(let i=1;i<=1025;i++){
         try{
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`, {
                 method: "GET",
@@ -39,25 +49,37 @@ async function fetchPokemon(){
             pokeDiv.appendChild(sprite);
             pokeDiv.appendChild(pokeId);
             pokeDiv.addEventListener("click", () => {
-                showPkmn(data);
+                window.scrollTo(0,0);
+                showPkmn(data, lang);
             })
             document.querySelector("nav").appendChild(pokeDiv);
             if(i === 1){
-                showPkmn(data);
+                showPkmn(data, lang);
+                window.scrollTo(0,0);
             }
+
         }
         catch (err){
             console.error(err);
         }
     }
+
 }
 
-function showPkmn(data){
+function showPkmn(data, lang){
     //random shiny chance
     const rand = Math.floor(Math.random() * 10) + 1;
     data.shiny = rand === 6 ? true : false;
     //generate description
-    generateInfo(data, regions);
+    currentPokemon = data;
+    generateInfo(data, regions, lang);
 }
+
+
+select.addEventListener("change", () => {
+    lang = select.value;
+    localStorage.setItem("lang", lang);
+    generateInfo(currentPokemon, regions, lang);
+})
 
 fetchPokemon();
