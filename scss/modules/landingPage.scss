@@ -1,0 +1,59 @@
+form{
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    .formfield{
+        &:first-of-type{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .radios{
+        background-color: rgb(238, 213, 255);
+        padding: 10px;
+        border: 2px solid rgb(192, 235, 252);
+        border-radius: 5px;
+    }
+    .radio{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .custom-playlist{
+        transform-origin: top center;
+        transform: scaleY(0);
+        transition: transform 80ms;
+    }
+
+    button{
+        color: white;
+        width: 150px;
+        height: 30px;
+        text-transform: uppercase;
+        background-color: rgb(98, 237, 255);
+        border: none;
+        border-radius: 5px;
+        box-shadow: 2px 2px 0 rgb(0, 0, 70);
+        cursor: pointer;
+
+        &:hover{
+            box-shadow: none;
+            background-color: rgb(22, 108, 165);
+        }
+
+        &:active{
+            border: {
+                top: 2px solid black;
+                left: 2px solid black;
+            }
+        }
+    }
+}
