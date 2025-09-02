@@ -1,0 +1,74 @@
+[
+    {
+        "name" : "en",
+        "height": "height",
+        "weight": "weight",
+        "intro": "Introduced in",
+        "moves": "Starting Moves",
+        "team": "Add to Team",
+        "total": "total",
+        "stats": {
+            "hp": "hp",
+            "attack": "attack",
+            "defense": "defense",
+            "special-attack": "special-attack",
+            "special-defense": "special-defense",
+            "speed": "speed"
+        },
+        "teamStats" : "Team Stats"
+    },
+    {
+        "name": "fr",
+        "height": "hauteur",
+        "weight": "poids",
+        "intro": "Introduit dans",
+        "moves": "commencer les mouvements",
+        "team": "ajouter à l'équipe",
+        "total": "totale",
+        "stats": {
+            "hp": "hp",
+            "attack": "attaque",
+            "defense": "défense",
+            "special-attack": "spéciale-attaque",
+            "special-defense": "spéciale-défense",
+            "speed": "vitesse"
+        },
+        "teamStats" : "statistiques de l'équipe" 
+    },
+    {
+        "name": "de",
+        "height": "Höhe",
+        "weight": "Gewicht",
+        "intro": "eingeführt in",
+        "moves": "Startzüge",
+        "team": "zum Team hinzufügen",
+        "total": "gesamt",
+        "stats": {
+            "hp": "hp",
+            "attack": "Angriff",
+            "defense": "Verteidigung",
+            "special-attack": "Spezialangriff",
+            "special-defense": "Spezialverteidigung",
+            "speed": "Geschwindigkeit"
+        },
+        "teamStats" : "Teamstatistiken" 
+    },
+    {
+        "name": "ja-Hrkt",
+        "height": "身長",
+        "weight": "重さ",
+        "intro": "で紹介された",
+        "moves": "開始動作",
+        "team": "チームに追加する",
+        "total": "合計",
+        "stats": {
+            "hp": "健康",
+            "attack": "攻撃",
+            "defense": "防衛",
+            "special-attack": "特殊攻撃",
+            "special-defense": "特殊防御",
+            "speed": "スピード"
+        },
+        "teamStats" : "チーム統計" 
+    }
+]

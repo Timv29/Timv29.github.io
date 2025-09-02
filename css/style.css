@@ -1,288 +1,301 @@
-form {
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-form .formfield:first-of-type {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-}
-form .radios {
-  background-color: rgb(238, 213, 255);
-  padding: 10px;
-  border: 2px solid rgb(192, 235, 252);
-  border-radius: 5px;
-}
-form .radio {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
-}
-form .custom-playlist {
-  transform-origin: top center;
-  transform: scaleY(0);
-  transition: transform 80ms;
-}
-form button {
-  color: white;
-  width: 150px;
-  height: 30px;
-  text-transform: uppercase;
-  background-color: rgb(98, 237, 255);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 2px 2px 0 rgb(0, 0, 70);
-  cursor: pointer;
-}
-form button:hover {
-  box-shadow: none;
-  background-color: rgb(22, 108, 165);
-}
-form button:active {
-  border-top: 2px solid black;
-  border-left: 2px solid black;
+@font-face {font-family:"Pokemon Pixel Font Regular";src:url("../fonts/pokemon_pixel_font.eot") format("eot"),url("../fonts/pokemon_pixel_font.woff") format("woff"),url("../fonts/pokemon_pixel_font.ttf") format("truetype"),url("../fonts/pokemon_pixel_font.svg#Pokemon-Pixel-Font") format("svg");font-weight:normal;font-style:normal;}
+@font-face {font-family: "Pokemon"; src:url("../fonts/Pokemon\ Classic.ttf")};
+
+*{
+    margin: 0;
+    padding: 0;
 }
 
-.gamemode label {
-  line-height: 30px;
+html{
+    font-family: "Pokemon";
+    font-size: 10px;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
 }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 23px;
-  width: 23px;
-  left: 4px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
+nav{
+    width: 33vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 10vw));
+    justify-content: space-evenly;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
+    position: sticky;
+    top: 0;
+    background-image:
+        radial-gradient(circle, white 7%, rgb(85, 83, 83) 7%, rgb(85, 83, 83) 12%, rgba(0,0,0,0)12%),
+        linear-gradient(to bottom, rgba(255, 0, 0, 0.5) 48%, rgb(85, 83, 83) 48%,rgb(85, 83, 83) 52%,  white 52%);
 }
 
-input:checked + .slider {
-  background-color: #450ad1;
+nav div{
+    text-align: center;
+    cursor: pointer;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #450ad1;
+nav div p{
+    margin: 0;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 0px white;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+#sprite{
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
 }
 
-@font-face {
-  font-family: "Allerta";
-  src: url(../fonts/Allerta-Regular.ttf);
-}
-body {
-  position: relative;
-  font-family: "Allerta";
-  margin: 0;
-  background-image: linear-gradient(to bottom, #baa2d7, #2c2041);
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-body h1 {
-  margin: 0;
-  font-size: 3.5rem;
-  color: white;
-  text-transform: uppercase;
-  text-shadow: 2px 4px 0 #31004d;
-}
-body h2 {
-  color: white;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 0 #31004d;
-}
-body #result {
-  margin-top: 25px;
-  margin-bottom: 0px;
-  font-size: 2.5rem;
-  color: white;
-  text-transform: uppercase;
-  text-shadow: 2px 4px 0 #31004d;
-}
-body #score {
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  margin: 0;
-}
-body #back {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-}
-body #back i {
-  font-size: 3em;
-  color: rgb(72, 14, 138);
+.main{
+    width: 67vw;
+    position: relative;
 }
 
-.songs {
-  margin-top: 50px;
-  width: fit-content;
-  height: fit-content;
-  display: none;
-  flex-direction: row;
-  gap: 50px;
+#lang{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
-.song-second, .song-first {
-  background-color: gray;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 30px;
-  max-width: 430px;
-  border-radius: 15px;
-  color: white;
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-.song-second:hover, .song-first:hover {
-  box-shadow: 0 0 10px white;
-}
-.song-second .info, .song-first .info {
-  text-align: center;
-  margin-bottom: 5px;
-}
-.song-second .albumCover, .song-first .albumCover {
-  width: 80%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-.song-second .title, .song-first .title {
-  margin: 0;
-  font-size: 32px;
-}
-.song-second .artist, .song-first .artist {
-  margin: 0;
-  font-size: 18px;
-}
-.song-second .progress, .song-first .progress {
-  margin-top: auto;
-}
-.song-second .duration, .song-first .duration {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.song-second .duration p, .song-first .duration p {
-  margin: 0;
+.info h1{
+    margin: 0;
+    font-size: 2rem;
 }
 
-.song-first {
-  background-image: linear-gradient(to bottom, #3cbc62, #051225);
+.info{
+    font-size: 1.2rem;
 }
 
-.song-second {
-  background-image: linear-gradient(to bottom, #3dc6d5, #061b2c);
+.info>p, #startingMoves, #moves, #infoHeader{
+    padding: 10px;
 }
 
-.loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #FFF;
-  border-bottom-color: #FF3D00;
-  border-radius: 50%;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+#infoHeader{
+    border-bottom: 2px solid rgb(56, 56, 56);
 }
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-#game-over {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+#startingMoves{
+    padding-bottom: 0;
 }
 
-#game-over-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 400px;
-  height: 200px;
-  background-color: rgb(255, 246, 222);
-}
-#game-over-message h2 {
-  margin: 0;
-}
-#game-over-message #final-score {
-  margin: 0;
-}
-#game-over-message button {
-  height: 30px;
-  width: 100px;
-  cursor: pointer;
-  font-size: 1em;
-  color: white;
-  background-color: #baa2d7;
-  border: none;
-  border-radius: 5px;
-}
-#game-over-message button:hover {
-  background-color: #8d69b9;
+#types{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
-.error {
-  color: rgb(156, 0, 0);
-  margin: 0;
+.type{
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
-/*# sourceMappingURL=style.css.map */
+.type p{
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+#evolutions{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+#evolutions img{
+    width: 15px;
+    height: auto;
+}
+
+.evolution{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px 8px;
+    margin: 3px 0;
+}
+
+.evolution p{
+    margin: 3px 0;
+}
+
+.evolution p:last-of-type{
+    font-size: 0.8rem;
+}
+
+#moves{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+.move{
+    min-width: 80px;
+    min-height: 20px;
+    text-align: center;
+    background-image: url("../images/pokemon_ui_template.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 2px 5px;
+}
+
+.move p{
+    margin: 5px auto;
+}
+
+#teamButton button{
+    width: 140px;
+    height: 40px;
+    margin: 10px;
+    font-family: "Pokemon";
+    font-size: 1rem;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#teamButton button:hover{
+    background-color: rgb(194, 194, 194);
+}
+
+#team{
+    padding: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 15px;
+    justify-content: center;
+    border-top: 2px solid rgb(56, 56, 56);
+    border-bottom: 2px solid rgb(56, 56, 56);
+}
+
+.teamPkmn{
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px;
+    padding-top: 0px;
+    background-color: rgb(243, 243, 243);
+    position: relative;
+}
+
+.teamPkmn p{
+    margin: 0;
+}
+
+.teamPkmn p:first-of-type{
+    width: 12px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.teamPkmn img{
+    cursor: pointer;
+}
+
+#infoHeader canvas{
+    width: clamp(250px, 50vw, 400px);
+}
+
+#teamStats canvas{
+    margin-top: 15px;
+    width: clamp(250px, 60vw, 600px);
+    min-height: 130px;
+}
+
+#teamStats h1{
+    text-align: center;
+}
+
+#teamTypes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 550px) {
+
+    body{
+        flex-direction: column;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    nav{
+        position: relative;
+        width: 100vw;
+        height: 30vh;
+        order: 2;
+    }
+
+    .main{
+        box-sizing: border-box;
+        width: 100vw;
+        max-height: 70vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        border-bottom: 2px solid black;
+        order: 1;
+    }
+
+    #infoHeader{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+    }
+    
+    #infoHeader canvas{
+        width: min(80vw, 400px)
+    }
+
+    .info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #startingMoves{
+        text-align: center;
+    }
+
+    #moves{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    #teamButton{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #teamStats{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #teamStats canvas{
+        width: min(90vw, 600px);
+        min-height: 150px
+    }
+
+}
